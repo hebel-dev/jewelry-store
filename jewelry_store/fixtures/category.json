@@ -1,0 +1,37 @@
+[
+    {
+        "model" : "jewelry_store.category",
+        "pk" :1,
+        "fields": {
+            "name" : "ring",
+            "slug": "ring"
+        }
+    },
+
+    {
+        "model" : "jewelry_store.category",
+        "pk" :2,
+        "fields": {
+            "name" : "earrings",
+            "slug": "earrings"
+        }
+    },
+
+    {
+        "model" : "jewelry_store.category",
+        "pk" :3,
+        "fields": {
+            "name" : "necklace",
+            "slug": "necklace"
+        }
+    },
+
+    {
+        "model" : "jewelry_store.category",
+        "pk" :4,
+        "fields": {
+            "name" : "bracelet",
+            "slug": "bracelet"
+        }
+    }
+]

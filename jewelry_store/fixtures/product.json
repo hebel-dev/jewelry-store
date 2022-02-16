@@ -1,0 +1,54 @@
+[
+    {
+        "model" : "jewelry_store.product",
+        "pk" :1,
+        "fields": {
+            "category" : 1,
+            "colection_name": 1,
+            "created_by":1,
+            "name":"Gniot",
+            "model_number":"Gniot/01/01/2022",
+            "material":"default",
+            "purity":".925",
+            "weight":"3.33",
+            "dimension":"223mmx12mmx4mm",
+            "image":"gniot.JPG",
+            "price":"750.25",
+            "promo_price": null,
+            "slug":"Gniot",
+            "in_stock":"True",
+            "not_new":"True",
+            "size":"15/US8",
+            "created":"2022-01-31 15:01:26.543212",
+            "updated":"2022-01-31 15:01:27.123456"
+
+        }
+    }, 
+
+    {
+        "model" : "jewelry_store.product",
+        "pk" :2,
+        "fields": {
+            "category" : 1,
+            "colection_name": null,
+            "created_by":1,
+            "name":"Owalik",
+            "model_number":"Owalik/02/01/2022",
+            "material":"default",
+            "purity":".925",
+            "weight":"4.33",
+            "dimension":"23mmx12mmx4mm",
+            "image":"gniot.JPG",
+            "price":"75.25",
+            "promo_price": null,
+            "slug":"Owalik",
+            "in_stock":"True",
+            "not_new":"True",
+            "size":"16/US8",
+            "created":"2022-01-31 15:01:36.543212",
+            "updated":"2022-01-31 15:01:37.123456"
+
+        }
+    }
+
+    ]

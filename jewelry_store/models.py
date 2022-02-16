@@ -88,8 +88,20 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
+class Collection(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=50)
+
+    class Meta:
+        verbose_name_plural = 'Collections'
+    
+    def __str__(self):
+        return self.name
+
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)
+    colection_name = models.ForeignKey(Collection, related_name='collection', on_delete=models.CASCADE, blank=True, null=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)   
     name = models.CharField(max_length=255)
     model_number = models.CharField(max_length=50)
@@ -103,7 +115,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=255)
     in_stock = models.BooleanField(default=True)
     not_new = models.BooleanField(default=True)
-    size = models.CharField(max_length=17, choices=SIZE_CHOICES)
+    size = models.CharField(max_length=17, choices=SIZE_CHOICES,blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -113,3 +125,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+# python manage.py makemigrations and python manage.py migrate
+
+        

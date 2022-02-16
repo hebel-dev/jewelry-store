@@ -1,0 +1,10 @@
+[
+    {
+        "model" : "jewelry_store.collection",
+        "pk" :1,
+        "fields": {
+            "name" : "akacja",
+            "slug": "akacja"
+        }
+    }
+]
