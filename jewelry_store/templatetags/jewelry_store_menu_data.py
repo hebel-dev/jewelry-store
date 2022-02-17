@@ -7,7 +7,7 @@ register = template.Library()
 @register.simple_tag
 
 def menu_data():
-    print('dupa')
+    # print('dupa')
     return {
         'categories': Category.objects.all()
     }

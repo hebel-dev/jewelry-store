@@ -49,6 +49,84 @@
             "updated":"2022-01-31 15:01:37.123456"
 
         }
+    },
+
+    {
+        "model" : "jewelry_store.product",
+        "pk" :3,
+        "fields": {
+            "category" : 2,
+            "colection_name": null,
+            "created_by":1,
+            "name":"Suszki",
+            "model_number":"Suszki/02/01/2022",
+            "material":"default",
+            "purity":".925",
+            "weight":"6.33",
+            "dimension":"2mmx2mmx4mm",
+            "image":"gniot.JPG",
+            "price":"85.25",
+            "promo_price": null,
+            "slug":"Suszki",
+            "in_stock":"True",
+            "not_new":"True",
+            "size":null,
+            "created":"2022-01-31 15:01:36.543212",
+            "updated":"2022-01-31 15:01:37.123456"
+
+        }
+    }, 
+
+    {
+        "model" : "jewelry_store.product",
+        "pk" :4,
+        "fields": {
+            "category" : 4,
+            "colection_name": null,
+            "created_by":1,
+            "name":"Obwodka",
+            "model_number":"Obwodka/02/01/2022",
+            "material":"default",
+            "purity":".925",
+            "weight":"116.33",
+            "dimension":"112mmx112mmx4mm",
+            "image":"gniot.JPG",
+            "price":"185.25",
+            "promo_price": null,
+            "slug":"Obwodka",
+            "in_stock":"True",
+            "not_new":"True",
+            "size":null,
+            "created":"2022-01-31 15:01:36.543212",
+            "updated":"2022-01-31 15:01:37.123456"
+
+        }
+    },
+
+    {
+        "model" : "jewelry_store.product",
+        "pk" :5,
+        "fields": {
+            "category" : 3,
+            "colection_name": null,
+            "created_by":1,
+            "name":"Kropla",
+            "model_number":"Kropla/05/01/2022",
+            "material":"default",
+            "purity":".925",
+            "weight":"11.33",
+            "dimension":"12mmx112mmx4mm",
+            "image":"gniot.JPG",
+            "price":"100.25",
+            "promo_price": null,
+            "slug":"Kropla",
+            "in_stock":"True",
+            "not_new":"True",
+            "size":null,
+            "created":"2022-01-31 15:01:36.543212",
+            "updated":"2022-01-31 15:01:37.123456"
+
+        }
     }
 
     ]
