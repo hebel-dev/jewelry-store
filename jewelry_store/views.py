@@ -1,8 +1,7 @@
 from multiprocessing import context
 from pyexpat import model
-from django.shortcuts import render
-from django.views.generic import ListView
-
+from django.shortcuts import get_object_or_404, render
+from django.views.generic import ListView, DetailView
 import jewelry_store
 
 from .models import Category, Collection, Product
@@ -29,3 +28,13 @@ class AllListView(ListView):
         context['products'] = self.queryset
         return context
         
+class ProductView(DetailView):
+    context_object_name = 'product_detail'
+    model = Product
+    template_name = "jewelry_store/product/detail_product.html"
+
+    def get_object(self):
+        obj = super().get_object()
+        obj = get_object_or_404(Product, slug=self.kwargs['slug'] ,in_stock=True)
+        return obj
+
