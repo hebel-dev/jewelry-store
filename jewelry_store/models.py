@@ -1,4 +1,4 @@
-from ast import mod
+from ast import arg, mod
 from decimal import Decimal
 from random import choice, choices
 from tabnanny import verbose
@@ -7,6 +7,8 @@ from unicodedata import category, name
 from django.db import models
 from django.forms import DecimalField
 from django.contrib.auth.models import User
+from django.urls import reverse
+
 
 Au = "gold"
 Ag = "silver"
@@ -123,6 +125,9 @@ class Product(models.Model):
         verbose_name_plural = 'Products'
         ordering = ('-created','-updated','weight', 'price',) 
 
+    def get_absolute_url(self):
+        return reverse("jewelry_store:product_detail", args=[self.slug])
+    
     def __str__(self):
         return self.name
 # python manage.py makemigrations and python manage.py migrate

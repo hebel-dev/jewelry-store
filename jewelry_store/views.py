@@ -33,6 +33,7 @@ class ProductView(DetailView):
     model = Product
     template_name = "jewelry_store/product/detail_product.html"
 
+    # it shows 404 when object is not in stock 
     def get_object(self):
         obj = super().get_object()
         obj = get_object_or_404(Product, slug=self.kwargs['slug'] ,in_stock=True)
