@@ -87,6 +87,9 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
 
+    def get_absolute_url(self):
+        return reverse("jewelry_store:all_cetegories", args=[self.slug])
+    
     def __str__(self):
         return self.name
 
@@ -97,6 +100,9 @@ class Collection(models.Model):
 
     class Meta:
         verbose_name_plural = 'Collections'
+    
+    def get_absolute_url(self):
+        return reverse("jewelry_store:product_detail", args=[self.slug])
     
     def __str__(self):
         return self.name

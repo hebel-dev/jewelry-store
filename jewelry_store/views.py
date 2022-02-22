@@ -1,3 +1,4 @@
+from gettext import Catalog
 from multiprocessing import context
 from pyexpat import model
 from django.shortcuts import get_object_or_404, render
@@ -5,17 +6,6 @@ from django.views.generic import ListView, DetailView
 import jewelry_store
 
 from .models import Category, Collection, Product
-
-# def all_products(request):
-#     products = Product.objects.all()
-#     return render(request, 'jewelry_store/home.html', {'products':products})
-
-# zamiast robię aktualnie templatetags
-# def categories(request):
-    
-#     return {
-#         'categories': Category.objects.all()
-#     }
 
 class AllListView(ListView):
     context_object_name = 'all_products'
@@ -39,3 +29,21 @@ class ProductView(DetailView):
         obj = get_object_or_404(Product, slug=self.kwargs['slug'] ,in_stock=True)
         return obj
 
+class CategoryView(ListView):
+    model = Category
+    context_object_name = 'cetegory'
+    template_name = 'jewelry_store/product/category.html'
+
+    
+    def get_queryset(self):
+        category = get_object_or_404(Category,slug=self.kwargs['slug'])
+        print(category)
+        products = Product.objects.filter(category=category)
+        print(products)
+        return products#Product.objects.filter(category=category)#products#Product.objects.filter(category=category)#products#
+    
+    def get_context_data(self,**kwargs):
+        context = super(CategoryView,self).get_context_data(**kwargs)
+        context['category'] = get_object_or_404(Category,slug=self.kwargs['slug'])
+        
+        return context
