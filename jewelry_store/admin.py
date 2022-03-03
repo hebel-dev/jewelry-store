@@ -11,7 +11,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'model_number','material','purity','weight','price', 'promo_price', 
-    'slug', 'in_stock', 'not_new', 'created', 'updated']
+    'slug', 'in_stock', 'not_new', 'created', 'updated', 'size']
 
     list_filter = ['material','purity','in_stock', 'size','not_new','category' ]
     list_editable = ['price', 'promo_price','in_stock' ]

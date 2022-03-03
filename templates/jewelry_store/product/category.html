@@ -9,26 +9,20 @@
 
 {% load jewelry_store_menu_data %}
 
-cat{{object_list}}
+{% comment %} cat{{object_list}}
 {{category_list.name}}
-{{category.name}}
+{{category.name}} {% endcomment %}
 
 
     <main>
-        
-        
-
-          
         <div class="album py-5 bg-light">
           <div class="container">
-            
             <div class="pb-3 h5">{{category.name}}'s</div>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
             
                 {% for product in object_list %} 
                 {% comment %} |slice:":3" {% endcomment %}
                 
-              
                 <div class="col">
                   <div class="card shadow-sm">
                     <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}">
@@ -53,7 +47,6 @@ cat{{object_list}}
                     </div>
                   </div>
                 </div>
-        
                 {% endfor %}
       
               {% for collection in collections %}

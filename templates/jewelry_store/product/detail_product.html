@@ -22,7 +22,8 @@
                 <p> (Model number)  <span class="lead">{{ product_detail.model_number }}</span> </p>
                 <p>material : {{ product_detail.material}}, purity : 0{{ product_detail.purity}}, </p>
                 <p>weight : {{ product_detail.weight}} grams</p>
-                <p>dimension : {{ product_detail.dimension}} grams</p>
+                <p>dimension : {{ product_detail.dimension}} </p>
+                <p>size : {{ product_detail.size}} grams</p>
 
                 <div class="border">
                     <div class="col border-bottom">
@@ -34,14 +35,21 @@
                     <div class="col">
                         <div class="row p-3">
                             <div class="col-6">
-                                <label for="select">Qty</label>
+                                
+                                
+                                <label for="select">Size</label>
                                 <select id="select">
+                                    {% comment %} patern version {% endcomment %}
+                                    {% for size in product_detail.size%}  
+                                    <option value="">{{ size }}</option>
+                                    {% endfor %}
 
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                </select>
+                                    
+                                    {% comment %} {% if product_detail.size%}
+                                    <div>{{size}}</div>   
+                                    <option value="">{{ product_detail.size }}</option>
+                                    {% endif %}  {% endcomment %}
+                                    </select>
 
                             </div>
                             <div class="col-6 text-end"><button type="button" class="btn btn-secondary btn-sm">Add to

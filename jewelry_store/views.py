@@ -34,16 +34,16 @@ class CategoryView(ListView):
     context_object_name = 'cetegory'
     template_name = 'jewelry_store/product/category.html'
 
-    
     def get_queryset(self):
-        category = get_object_or_404(Category,slug=self.kwargs['slug'])
-        print(category)
-        products = Product.objects.filter(category=category)
-        print(products)
-        return products#Product.objects.filter(category=category)#products#Product.objects.filter(category=category)#products#
+        products = Product.objects.filter(category__slug=self.kwargs['slug'])
+        # the same but shorter, was down 
+        # category = get_object_or_404(Category,slug=self.kwargs['slug'])
+        # print(category)
+        # products = Product.objects.filter(category=category)
+        # print(products)
+        return products    #Product.objects.filter(category=category)#products#Product.objects.filter(category=category)#products#
     
     def get_context_data(self,**kwargs):
         context = super(CategoryView,self).get_context_data(**kwargs)
         context['category'] = get_object_or_404(Category,slug=self.kwargs['slug'])
-        
         return context

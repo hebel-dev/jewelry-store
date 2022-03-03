@@ -8,6 +8,7 @@ from django.db import models
 from django.forms import DecimalField
 from django.contrib.auth.models import User
 from django.urls import reverse
+from multiselectfield import MultiSelectField
 
 
 Au = "gold"
@@ -123,7 +124,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=255)
     in_stock = models.BooleanField(default=True)
     not_new = models.BooleanField(default=True)
-    size = models.CharField(max_length=17, choices=SIZE_CHOICES,blank=True, null=True)
+    size = MultiSelectField(choices=SIZE_CHOICES,blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

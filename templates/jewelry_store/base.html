@@ -37,36 +37,20 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                               Products
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                
-                                <li>
-                                  {% menu_data as menu %}
-                                  {% for category in menu.categories %}
-                                    <a class="dropdown-item" href="#">{{category.name|title}} </a>
-                                    {% endfor %}
-                                </li>
-                                <!-- all from BOOTSTRAP example -->
-                                {% comment %} <li><a class="dropdown-item" href="#">Rings</a></li>
-                                <li><a class="dropdown-item" href="#">Necklaces</a></li>
-                                <li><a class="dropdown-item" href="#">Bracelets</a></li>
-                                <li><a class="dropdown-item" href="#">Earrings</a></li> {% endcomment %}
+                              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                  <li>
+                                    {% menu_data as menu %}
+                                    {% for category in menu.categories %}
+                                      <a class="dropdown-item" href="#">{{category.name|title}} </a>
+                                      {% endfor %}
+                                  </li>
+                                  <!-- all from BOOTSTRAP example -->
+                                  {% comment %} <li><a class="dropdown-item" href="#">Rings</a></li>
+                                  <li><a class="dropdown-item" href="#">Necklaces</a></li>
+                                  <li><a class="dropdown-item" href="#">Bracelets</a></li>
+                                  <li><a class="dropdown-item" href="#">Earrings</a></li> {% endcomment %}
                               </ul>
-                              
-                            
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Collections
-                                </a>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    News
-                                </a>     
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                              <li><a class="dropdown-item" href="#">Action</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                          </li>
+                           </li>
                         </ul>
                       </div>
                     </div>
