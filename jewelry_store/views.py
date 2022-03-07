@@ -31,7 +31,7 @@ class ProductView(DetailView):
 
 class CategoryView(ListView):
     model = Category
-    context_object_name = 'cetegory'
+    context_object_name = 'all_categories'
     template_name = 'jewelry_store/product/category.html'
 
     def get_queryset(self):
