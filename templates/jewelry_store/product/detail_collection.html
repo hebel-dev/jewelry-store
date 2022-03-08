@@ -1,0 +1,28 @@
+{% extends '../base.html' %}
+
+{%load static %}
+
+{%block title %}
+{{product_detail.name}}
+{% endblock %}
+
+{%block content %}
+
+<div>
+    dupa
+    {{Product.collection_name}}
+{% comment %} {{products}} {% endcomment %}
+{% for p in products%}
+{% comment %} {{p.colection_name}}{{p.name}} {% endcomment %}
+{%if p.colection_name %}
+{{p.colection_name}}{{p.name}}{{p.material}}
+{%endif%}
+{% endfor %}
+
+
+{% comment %} {{collections}} {% endcomment %}
+</div>
+
+
+
+{% endblock %}

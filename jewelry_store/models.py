@@ -103,7 +103,7 @@ class Collection(models.Model):
         verbose_name_plural = 'Collections'
     
     def get_absolute_url(self):
-        return reverse("jewelry_store:product_detail", args=[self.slug])
+        return reverse("jewelry_store:detail_collection", args=[self.slug])
     
     def __str__(self):
         return self.name

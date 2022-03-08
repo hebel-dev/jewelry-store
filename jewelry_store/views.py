@@ -47,3 +47,14 @@ class CategoryView(ListView):
         context = super(CategoryView,self).get_context_data(**kwargs)
         context['category'] = get_object_or_404(Category,slug=self.kwargs['slug'])
         return context
+class CollectionView(ListView):
+     context_object_name = 'collection_detail'
+     queryset = Product.objects.all
+    
+     template_name = "jewelry_store/product/detail_collection.html"
+
+     def get_context_data(self,**kwargs):
+        context = super(ListView,self).get_context_data(**kwargs)
+        context['collections'] =  Collection.objects.all
+        context['products'] = self.queryset
+        return context
