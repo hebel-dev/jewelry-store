@@ -1,5 +1,10 @@
+from __future__ import annotations
 from ast import arg, mod
+from asyncio.windows_events import NULL
+import collections
 from decimal import Decimal
+from itertools import product
+from pickle import TRUE
 from random import choice, choices
 from tabnanny import verbose
 from traceback import print_exception
@@ -9,6 +14,9 @@ from django.forms import DecimalField
 from django.contrib.auth.models import User
 from django.urls import reverse
 from multiselectfield import MultiSelectField
+from django.db.models import Sum,Avg
+
+import pkg_resources
 
 
 Au = "gold"
@@ -103,7 +111,7 @@ class Collection(models.Model):
         verbose_name_plural = 'Collections'
     
     def get_absolute_url(self):
-        return reverse("jewelry_store:detail_collection", args=[self.slug])
+        return reverse("jewelry_store:all_collections", args=[self.slug])
     
     def __str__(self):
         return self.name
@@ -134,9 +142,19 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse("jewelry_store:product_detail", args=[self.slug])
+    #def collection_sumarum(self):#    v=Product.objects.filter(price=True).aggregate(Sum('price'))#    print(v)# collections=Product.objects.get(pk=colection_name_id).aggregate(Sum('price'))# key_collections = Collection.id.#collections = Product.objects.filter(colection_name_id=1)#print('COLLECTIONS',collections)# for product in collections:#     Decimal(product.price)#     price = []#     a=type(Decimal(product.price))#     # print(a)#     # print(price)#     price.append(Decimal(product.price))# print(price)# print('FIRST',product.price)# print("ŁołołO",price)# v=Product.objects.aggregate(Sum('price')){{ p.collection_sumarum }}# print(collections)# return print('COLLECTIONS',collections)
+
+    def summarum(self):
+        # price = Product.objects.filter(price=self.price)
+        v=Product.objects.aggregate(Sum('price'))
+        # 
+        # a = v+v
+        # print('dupa')
+        return v
     
     def __str__(self):
         return self.name
+
 # python manage.py makemigrations and python manage.py migrate
 
         

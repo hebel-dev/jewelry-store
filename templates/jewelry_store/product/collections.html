@@ -1,0 +1,193 @@
+{% extends '../base.html' %}
+
+{%load static %}
+
+{%block title %}
+{{product_detail.name}}
+{% endblock %}
+
+
+{%block content %}
+
+{% load menu_data_products %}
+{% load menu_data_categories %}
+
+cat{{object_list}}
+{{category_list.name}}
+{{category.name}}
+cat{{object_list}}{{all_collections}}
+{{category_list.name}}
+{{category.name}} 
+{{product.name}}
+{{product_list}}
+{{summarum}}
+{%for p in object_list%}
+{{p.price}}
+{{p.summarum}}
+
+{%endfor%}
+
+    <main>
+        <div class="album py-5 bg-light">
+          <div class="container">
+            <div class="pb-3 h5">{{collection.name}}</div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+            
+                {% for product in object_list %} 
+                {% comment %} |slice:":3" {% endcomment %}
+                
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}">
+                    <div class="card-body">
+                      <p class="card-text">
+                        <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.name}}</a>
+                      </p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">material : {{product.material}}</small>
+                      </div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">purity : 0{{product.purity}} </small>
+                      </div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">weight : {{product.weight}}</small>
+                      </div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">
+                          <h5>price : {{product.price}}</h5>
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+      
+              {% for collection in collections %}
+      
+              <div class="col">
+                <div class="card shadow-sm">
+                  <img class="img-fluid" alt="Responsive image" src="{{ collection.image.url }}">
+                  <div class="card-body">
+                    <p class="card-text">
+                      <a class="text-dark text-decoration-none" href="{{ collection.get_absolute_url }}">{{ collection.name }}</a>
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <small class="text-muted">9min read</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              {% endfor %}
+
+            </div>
+          </div>
+        </div>
+      
+      
+      </main>
+
+
+
+    
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {%block content %}
+
+<div>
+    dupa
+    
+    <div>dupa 1{{collection_detail}}</div>
+        <div>dupa 2{{products}}</div>
+            <div>dupa 3{{collections}}</div>
+                <div>dupa 4{{Product.collection_name}}</div>
+    
+{% comment %} {{products}} {% endcomment %}
+{% comment %} {% for p in object_list%}
+{% comment %} {{p.colection_name}}{{p.name}} {% endcomment %}
+{% comment %} {%if p.colection_name %}
+{{p.colection_name}}{{p.name}}{{p.material}}
+
+
+<div class="container">
+    <main class="pt-5">
+        <div class="row g-3">
+            <div class="col-md-5 col-lg-5 order-md-first bg-light">
+                <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ p.image.url }}">
+            </div>
+            <div class="col-md-7 col-lg-7 ps-md-3 ps-lg-5">
+                <h1 class="mb-0 h4">{{ p.name }}</h1>
+                <p> (Model number)  <span class="lead">{{ p.model_number }}</span> </p>
+                <p>material : {{ p.material}}, purity : 0{{ p.purity}}, </p>
+                <p>weight : {{ p.weight}} grams</p>
+                <p>dimension : {{ p.dimension}} </p>
+                <p>size : {{ p.size}} grams</p>
+
+                <div class="border">
+                    <div class="col border-bottom">
+                        <div class="row p-3">
+                            <div class="col-6 h5">Price</div>
+                            <div class="col-6 text-end"><span class="h4 fw-bold">PLN {{ p.collection_sumarum }}{{p.price}}</span></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row p-3">
+                            <div class="col-6">
+                                
+                                
+                                <label for="select">Size</label>
+                                <select id="select">
+                                    {% comment %} patern version {% endcomment %}
+                                    
+                                    {% comment %} {% for size in p.size%}
+                                    {%if size %}  
+                                    <option value="">{{ size }}</option>
+                                    {%endif%}
+                                    {% endfor %}
+                                    
+                                    
+                                    {% comment %} {% if product_detail.size%}
+                                    <div>{{size}}</div>   
+                                    <option value="">{{ product_detail.size }}</option>
+                                    {% endif %}  {% endcomment %}
+                                    {% comment %} </select>
+
+                            </div>
+                            <div class="col-6 text-end"><button type="button" class="btn btn-secondary btn-sm">Add to
+                                    basket</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main> {% endcomment %}
+
+{% comment %} </div>  {% endcomment %} 
+{% comment %}  
+{%endif%}
+
+{% endfor %} {% endcomment %}
+
+
+{% comment %} {{collections}} {% endcomment %}
+{% comment %} </div> {% endcomment %}
+
+
+
+{% comment %} {% endblock %} {% endcomment %}

@@ -58,7 +58,7 @@
                     <li>
                       {% menu_data_categories as menu %}
                       {% for collection in menu.collections %}
-                      <a class="dropdown-item" href="#">{{collection.name|title}} </a>
+                      <a class="dropdown-item" href={{collection.get_absolute_url}}>{{collection.name|title}} </a>
                       {% endfor %}
                     </li>
                   </ul>
