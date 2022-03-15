@@ -1,3 +1,4 @@
+import collections
 from gettext import Catalog
 from multiprocessing import context
 from pyexpat import model
@@ -17,6 +18,10 @@ class AllListView(ListView):
         context = super(AllListView,self).get_context_data(**kwargs)
         context['collections'] =  Collection.objects.all
         context['products'] = self.queryset
+        
+        products = Product.objects.filter(colection_name__id=1)
+        
+        context['prodo'] = products.aggregate(Sum('price'))
         return context
         
 class ProductView(DetailView):
@@ -49,7 +54,8 @@ class CollectionView(ListView):
     model = Collection
     context_object_name = 'all_collections'
     template_name = 'jewelry_store/product/collections.html'
-
+    pk_url_kwarg = 'collection_id'
+    
     def get_queryset(self):
         products = Product.objects.filter(colection_name__slug=self.kwargs['slug'])
         # the same but shorter, was down # category = get_object_or_404(Category,slug=self.kwargs['slug'])# print(category)# products = Product.objects.filter(category=category)# print(products)
@@ -58,6 +64,17 @@ class CollectionView(ListView):
     def get_context_data(self,**kwargs):
         context = super(CollectionView,self).get_context_data(**kwargs)
         context['collection'] = get_object_or_404(Collection,slug=self.kwargs['slug'])
+        products = Product.objects.filter(colection_name__slug=self.kwargs['slug'])
+        context['prodo'] = products.aggregate(Sum('price'))
         return context
+
+    # def summa(request, pk):
+    #     collection = Collection.objects.get(pk=pk)
+    #     return render(
+    #     request,
+    #     'jewelry_store/product/collections.html',
+    #     {'collection': collection}
+    # )
+
 
     

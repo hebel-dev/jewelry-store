@@ -10,21 +10,6 @@
 {% load menu_data_products %}
 {% load menu_data_categories %}
 
-
-
-    <ul>
-        {% for product in products %}
-            <li>
-                <a href="{{product.get_absolute_url}}">{{product.name}}</a>({{product.weight}})
-            </li>     
-        {% endfor %}
-        {% for collection in collections %}
-            <li>
-                <a href = "{{collection.get_absolute_url}}">{{collection.name}}</a>
-            </li>
-        {% endfor %}
-    </ul>
-
     <main>
 
         <section class="py-5 text-center container">
@@ -91,7 +76,7 @@
                   </div>
                 </div>
               </div>
-      
+              {{prodo.price__sum}}
               {% endfor %}
 
             </div>
