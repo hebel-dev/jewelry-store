@@ -76,13 +76,25 @@
                   </div>
                 </div>
               </div>
-              {{prodo.price__sum}}
+              
+              dupa {{prodo}}
               {% endfor %}
 
             </div>
           </div>
         </div>
-      
+        {% for c in collections%}
+        <div>{{c}}</div>
+        {% for p in products%}
+        {%if c.id == p.colection_name_id %}
+        
+        {{prodo}}
+        dupa {{c.prodo}}
+        {{p.name}}{{p.price}}{{p.prodo}}
+        {%endif%} 
+        <div></div>
+        {%endfor%}
+      {%endfor%}
       
       </main>
 

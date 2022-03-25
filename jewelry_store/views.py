@@ -2,7 +2,7 @@ import collections
 from gettext import Catalog
 from multiprocessing import context
 from pyexpat import model
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.views.generic import ListView, DetailView
 import jewelry_store
 
@@ -16,14 +16,28 @@ class AllListView(ListView):
 
     def get_context_data(self,**kwargs):
         context = super(AllListView,self).get_context_data(**kwargs)
+        # print(context)
         context['collections'] =  Collection.objects.all
         context['products'] = self.queryset
+        # context['cool'] = get_list_or_404(Collection, pk=True) #id=1
+        # print("context['cool']",context['cool'])
+        # print(kwargs)
+        # print(kwargs)
+        # products = Product.objects.filter(colection_name__id=2)
+        context['sum']= Product.objects.all
+        print(context['sum'])
+        # ex = Product.objects.all()
+        # print(ex)
+        # prodo= products.aggregate(Sum('price'))
+        # print(context['prodo'])
         
-        products = Product.objects.filter(colection_name__id=1)
-        
-        context['prodo'] = products.aggregate(Sum('price'))
+        context['prodo'] = Product.objects.all().aggregate(Sum('price'))['price__sum']
+        print("context['prodo']",context['prodo'])
+
         return context
-        
+
+    
+
 class ProductView(DetailView):
     context_object_name = 'product_detail'
     model = Product
@@ -34,7 +48,6 @@ class ProductView(DetailView):
         obj = super().get_object()
         obj = get_object_or_404(Product, slug=self.kwargs['slug'] ,in_stock=True)
         return obj
-
 class CategoryView(ListView):
     model = Category
     context_object_name = 'all_categories'
@@ -67,14 +80,3 @@ class CollectionView(ListView):
         products = Product.objects.filter(colection_name__slug=self.kwargs['slug'])
         context['prodo'] = products.aggregate(Sum('price'))
         return context
-
-    # def summa(request, pk):
-    #     collection = Collection.objects.get(pk=pk)
-    #     return render(
-    #     request,
-    #     'jewelry_store/product/collections.html',
-    #     {'collection': collection}
-    # )
-
-
-    

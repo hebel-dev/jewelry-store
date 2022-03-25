@@ -144,47 +144,16 @@ class Product(models.Model):
         return reverse("jewelry_store:product_detail", args=[self.slug])
     #def collection_sumarum(self):#    v=Product.objects.filter(price=True).aggregate(Sum('price'))#    print(v)# collections=Product.objects.get(pk=colection_name_id).aggregate(Sum('price'))# key_collections = Collection.id.#collections = Product.objects.filter(colection_name_id=1)#print('COLLECTIONS',collections)# for product in collections:#     Decimal(product.price)#     price = []#     a=type(Decimal(product.price))#     # print(a)#     # print(price)#     price.append(Decimal(product.price))# print(price)# print('FIRST',product.price)# print("ŁołołO",price)# v=Product.objects.aggregate(Sum('price')){{ p.collection_sumarum }}# print(collections)# return print('COLLECTIONS',collections)
 
-    def summarum(self):
-        # # for p in price:
-        # #     sum_price.append(p.price.distinct())
-        
-        # print('DUPA',price.aggregate(Sum('price')))
-        x=Product.objects.all()
-        # z = Product.objects.get(pk=self.colection_name_id)
-        # print('ZZZ',z)
-        z = Collection.objects.all()
-        # print(x)
-        f=[]
-        for y in x :
-            # print('YYYYY',y.colection_name_id)
-            for m in z:
-                # print('DUPA',m.id)
-                if m.id == y.colection_name_id:
-                    # print('DUPA',m.id)
-                    # print('chuj')
-                    # f=0
-                    # f += y.price
-                    # print('FFFF????',f)
-                    # print('CHUJ',y.price)
-                    f.append(y.price)
-                    # print(f)
-            # if y.colection_name == z.id:
-            #     print(y.price)
-
-        # print('SHIT',Product.objects.aggregate(Sum('price')))
-        
-        
-        # v=Product.objects.annotate(Sum('price'))#agregate
-        # print(v)
-        # sum_price=[]
-        # sum_price.append(v)
-        # print(prajs)
-        # # a = v+vco
-        # print('dupa')
-        return Product.objects.aggregate(Sum('price'))
     
+    def collection_price(self):
+        coll = Collection.objects.all
+        print(coll)
+        print("dupa")
+        return coll
+
     def __str__(self):
         return self.name
+
 
 # python manage.py makemigrations and python manage.py migrate
 
