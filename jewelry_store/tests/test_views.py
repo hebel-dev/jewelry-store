@@ -6,7 +6,7 @@ from unittest import skip
 from urllib import request, response
 
 from django.contrib.auth.models import User
-from django.http import HttpRequest
+from django.http import HttpRequest, request
 from django.test import Client, TestCase
 from django.urls import reverse
 
@@ -62,7 +62,7 @@ class TestViewResponses(TestCase):
         response=self.c.get(reverse("jewelry_store:all_collections", args=['akacja']))
         self.assertEqual(response.status_code,200)
 
-    def test_home_page_html(self):
-        request = HttpRequest()
-        response = request(AllListView)
-        # print(response)
+    # def test_home_page_html(self):
+    #     request = HttpRequest()
+    #     response = self.request.get(AllListView)
+    #     # print(response)
