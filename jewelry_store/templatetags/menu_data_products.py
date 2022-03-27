@@ -1,6 +1,6 @@
 from django import template
-from jewelry_store.models import Category, Collection
 
+from jewelry_store.models import Category, Collection
 
 register = template.Library()
 

@@ -1,7 +1,8 @@
 from __future__ import annotations
+
+import collections
 from ast import arg, mod
 from asyncio.windows_events import NULL
-import collections
 from decimal import Decimal
 from itertools import product
 from pickle import TRUE
@@ -9,15 +10,14 @@ from random import choice, choices
 from tabnanny import verbose
 from traceback import print_exception
 from unicodedata import category, name
-from django.db import models
-from django.forms import DecimalField
-from django.contrib.auth.models import User
-from django.urls import reverse
-from multiselectfield import MultiSelectField
-from django.db.models import Sum,Avg
 
 import pkg_resources
-
+from django.contrib.auth.models import User
+from django.db import models
+from django.db.models import Avg, Sum
+from django.forms import DecimalField
+from django.urls import reverse
+from multiselectfield import MultiSelectField
 
 Au = "gold"
 Ag = "silver"

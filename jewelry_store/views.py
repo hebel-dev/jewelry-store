@@ -1,13 +1,16 @@
 import collections
 from gettext import Catalog
 from multiprocessing import context
-from pyexpat import model
+
+from django.db.models import Sum
 from django.shortcuts import get_list_or_404, get_object_or_404, render
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView, ListView
+from pyexpat import model
+
 import jewelry_store
 
 from .models import Category, Collection, Product
-from django.db.models import Sum
+
 
 class AllListView(ListView):
     context_object_name = 'all_products'

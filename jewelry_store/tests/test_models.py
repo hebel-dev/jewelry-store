@@ -2,9 +2,12 @@ from asyncio.windows_events import NULL
 from email.policy import default
 from os import name
 from unicodedata import category
-from django.test import TestCase
+
 from django.contrib.auth.models import User
+from django.test import TestCase
+
 from jewelry_store.models import Category, Product
+
 
 class TestCategoriesModel(TestCase):
 

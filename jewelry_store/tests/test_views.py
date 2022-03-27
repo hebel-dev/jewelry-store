@@ -1,16 +1,18 @@
 from audioop import reverse
 from email.policy import default
+from msilib.schema import ListView
 from multiprocessing.connection import Client
-from urllib import response
-from django.test import TestCase 
 from unittest import skip
+from urllib import request, response
 
-from django.test import TestCase
 from django.contrib.auth.models import User
-
-from jewelry_store.models import Category, Product, Collection
-from django.test import Client
+from django.http import HttpRequest
+from django.test import Client, TestCase
 from django.urls import reverse
+
+from jewelry_store.models import Category, Collection, Product
+from jewelry_store.views import AllListView
+
 # @skip("demonstrating_skipping")
 # class TestSkip(TestCase):
 #     def test_skip_example(self):
@@ -59,3 +61,8 @@ class TestViewResponses(TestCase):
     def test_collection_detail_url(self):
         response=self.c.get(reverse("jewelry_store:all_collections", args=['akacja']))
         self.assertEqual(response.status_code,200)
+
+    def test_home_page_html(self):
+        request = HttpRequest()
+        response = request(AllListView)
+        # print(response)
