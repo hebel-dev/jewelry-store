@@ -1,7 +1,7 @@
 {% extends './base.html' %}
 
 {%load static %}
-{%block title %} Home{% endblock %}
+{%block title %} JewelryStore{% endblock %}
 
 
 
@@ -90,12 +90,15 @@
         
         {{prodo}}
         dupa {{c.prodo}}
-        {{p.name}}{{p.price}}{{p.prodo}}
+        
+        {{p.name}}{{p.price}}{{p.prodo}}DUPA{{object_list}}dupa2{{p.sum_total}}dupa3{{p.sum_total}}
         {%endif%} 
         <div></div>
         {%endfor%}
       {%endfor%}
       
+        
+        
       </main>
 
 

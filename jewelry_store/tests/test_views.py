@@ -3,7 +3,7 @@ from email.policy import default
 from msilib.schema import ListView
 from multiprocessing.connection import Client
 from unittest import skip
-from urllib import request, response
+from urllib import request
 
 from django.contrib.auth.models import User
 from django.http import HttpRequest, request
@@ -42,27 +42,31 @@ class TestViewResponses(TestCase):
            not_new = 'True',
            size = '15/US8',
            created = '2022-01-31 15:01:26.543212',
-           updated = '2022-01-31 15:01:27.123456'
-       )
+           updated = '2022-01-31 15:01:27.123456',
+           )
 
     def test_url(self):
         response = self.c.get('/')
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.status_code, 200)
 
-    
     def test_product_detail_url(self):
-        response=self.c.get(reverse("jewelry_store:product_detail", args=['Gniot']))
-        self.assertEqual(response.status_code,200) 
+        response = self.c.get(reverse("jewelry_store:product_detail", args=['Gniot']))
+        self.assertEqual(response.status_code, 200)
 
     def test_category_detail_url(self):
-        response=self.c.get(reverse("jewelry_store:all_categories", args=['ring']))
-        self.assertEqual(response.status_code,200)
+        response = self.c.get(reverse("jewelry_store:all_categories", args=['ring']))
+        self.assertEqual(response.status_code, 200)
 
     def test_collection_detail_url(self):
-        response=self.c.get(reverse("jewelry_store:all_collections", args=['akacja']))
-        self.assertEqual(response.status_code,200)
+        response = self.c.get(reverse("jewelry_store:all_collections", args=['akacja']))
+        self.assertEqual(response.status_code, 200)
 
     # def test_home_page_html(self):
     #     request = HttpRequest()
     #     response = self.request.get(AllListView)
     #     # print(response)
+    def test_allowed_hosts(self):
+        response = self.c.get('/', HTTP_HOST='wrongadress.com')
+        self.assertEqual(response.status_code, 400)
+        response = self.c.get('/', HTTP_HOST='mydomain.com')
+        self.assertEqual(response.status_code, 200)

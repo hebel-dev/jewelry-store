@@ -16,30 +16,39 @@ class AllListView(ListView):
     context_object_name = 'all_products'
     queryset = Product.objects.filter(in_stock=True)
     template_name = 'jewelry_store/home.html'
-
-    def get_context_data(self,**kwargs):
+    # pk_url_kwarg='collection_id' 
+    
+    def get_context_data(self, **kwargs,):
+        
         context = super(AllListView,self).get_context_data(**kwargs)
+           
+        print('dupaaaa',kwargs)
         # print(context)
         context['collections'] =  Collection.objects.all
         context['products'] = self.queryset
-        # context['cool'] = get_list_or_404(Collection, pk=True) #id=1
-        # print("context['cool']",context['cool'])
-        # print(kwargs)
-        # print(kwargs)
-        # products = Product.objects.filter(colection_name__id=2)
-        context['sum']= Product.objects.all
-        print(context['sum'])
-        # ex = Product.objects.all()
-        # print(ex)
-        # prodo= products.aggregate(Sum('price'))
-        # print(context['prodo'])
         
+        context['sum']= Product.objects.all()
+        
+        print("DUPA1",Product.objects.filter(colection_name=1))
+        print("DUPA2",Product.objects.filter(colection_name=self.kwargs.get('collection_id')))
         context['prodo'] = Product.objects.all().aggregate(Sum('price'))['price__sum']
         print("context['prodo']",context['prodo'])
 
         return context
+        
+    def get_queryset(self) :
+        queryset = Product.objects.filter(in_stock=True)
+        collections = Collection.objects.all()
+        sum_tot=0
+        for col in collections:
+            for qs in queryset:
+                if qs.colection_name_id == col.id:
+                    sum_tot += qs.price
+                    print('sum_tot',sum_tot)
+        queryset = sum_tot
+        print("aaaaaa",queryset)    
+        return queryset
 
-    
 
 class ProductView(DetailView):
     context_object_name = 'product_detail'

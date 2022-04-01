@@ -4,6 +4,7 @@ import collections
 from ast import arg, mod
 from asyncio.windows_events import NULL
 from decimal import Decimal
+from email.policy import default
 from itertools import product
 from pickle import TRUE
 from random import choice, choices
@@ -112,7 +113,7 @@ class Collection(models.Model):
     
     def get_absolute_url(self):
         return reverse("jewelry_store:all_collections", args=[self.slug])
-    
+
     def __str__(self):
         return self.name
 
@@ -126,7 +127,7 @@ class Product(models.Model):
     purity = models.CharField(max_length=4, choices=PURITY_CHOICES,default=".925")
     weight = models.DecimalField(max_digits=5, decimal_places=2)
     dimension = models.CharField(max_length=255)  ###!!!
-    image = models.ImageField(upload_to = 'images/') ###!!! only one option
+    image = models.ImageField(upload_to = 'images/', default='images/default.jpg') ###!!! only one option
     price = models.DecimalField(max_digits=6, decimal_places=2)
     promo_price = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
     slug = models.SlugField(max_length=255)
@@ -136,6 +137,10 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+
+
+
+
     class Meta():
         verbose_name_plural = 'Products'
         ordering = ('-created','-updated','weight', 'price',) 
@@ -144,12 +149,55 @@ class Product(models.Model):
         return reverse("jewelry_store:product_detail", args=[self.slug])
     #def collection_sumarum(self):#    v=Product.objects.filter(price=True).aggregate(Sum('price'))#    print(v)# collections=Product.objects.get(pk=colection_name_id).aggregate(Sum('price'))# key_collections = Collection.id.#collections = Product.objects.filter(colection_name_id=1)#print('COLLECTIONS',collections)# for product in collections:#     Decimal(product.price)#     price = []#     a=type(Decimal(product.price))#     # print(a)#     # print(price)#     price.append(Decimal(product.price))# print(price)# print('FIRST',product.price)# print("ŁołołO",price)# v=Product.objects.aggregate(Sum('price')){{ p.collection_sumarum }}# print(collections)# return print('COLLECTIONS',collections)
 
-    
-    def collection_price(self):
-        coll = Collection.objects.all
-        print(coll)
-        print("dupa")
-        return coll
+    # def sum_total(self) :
+    #     queryset = Product.objects.filter(in_stock=True)
+    #     collections = Collection.objects.all()
+    #     sum_tot=0
+    #     for col in collections:
+    #         for qs in queryset:
+    #             if qs.colection_name_id == col.id:
+    #                 sum_tot += qs.price
+    #                 print('sum_tot',sum_tot)
+    #     # queryset = sum_tot
+    #     # print("bbbbbb",queryset)    
+    #     return sum_tot
+
+    def sum_total(self) :
+        queryset = Product.objects.filter(in_stock=True)
+        collections = Collection.objects.all()
+        sum_tot=0
+        for col in collections:
+            for qs in queryset:
+                if qs.colection_name_id == col.id:
+                    sum_tot += qs.price
+                    print('sum_tot',sum_tot)
+        # queryset = sum_tot
+        # print("bbbbbb",queryset)    
+    def sum_total(self) :
+        queryset = Product.objects.filter(in_stock=True)
+        collections = Collection.objects.all()
+        sum_tot=0
+        sum_tot_list = []
+        num = len(collections)
+        print('numer dlugosci listy',num)
+        for col in collections:
+            print(col.id)
+            print(collections)    
+                
+            
+            for qs in queryset:
+                # for col.id in collections:
+                    # print("col.id", col.id)
+                if col.id ==  qs.colection_name_id:
+                   
+                    sum_tot += qs.price
+                    
+                    
+                    print('sum_tot',sum_tot)
+                    sum_tot_list.append(sum_tot)
+        # queryset = sum_tot
+        # print("bbbbbb",queryset)    
+            return sum_tot
 
     def __str__(self):
         return self.name
