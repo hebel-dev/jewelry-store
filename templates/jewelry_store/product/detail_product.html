@@ -15,11 +15,12 @@
     <main class="pt-5">
         <div class="row g-3">
             <div class="col-md-5 col-lg-5 order-md-first bg-light">
-                <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ product_detail.image.url }}">
+                <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image"
+                    src="{{ product_detail.image.url }}">
             </div>
             <div class="col-md-7 col-lg-7 ps-md-3 ps-lg-5">
                 <h1 class="mb-0 h4">{{ product_detail.name }}</h1>
-                <p> (Model number)  <span class="lead">{{ product_detail.model_number }}</span> </p>
+                <p> (Model number) <span class="lead">{{ product_detail.model_number }}</span> </p>
                 <p>material : {{ product_detail.material}}, purity : 0{{ product_detail.purity}}, </p>
                 <p>weight : {{ product_detail.weight}} grams</p>
                 <p>dimension : {{ product_detail.dimension}} </p>
@@ -29,31 +30,33 @@
                     <div class="col border-bottom">
                         <div class="row p-3">
                             <div class="col-6 h5">Price</div>
-                            <div class="col-6 text-end"><span class="h4 fw-bold">PLN {{ product_detail.price }}</span></div>
+                            <div class="col-6 text-end"><span class="h4 fw-bold">PLN {{ product_detail.price }}</span>
+                            </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="row p-3">
                             <div class="col-6">
-                                
-                                
+
+
                                 <label for="select">Size</label>
                                 <select id="select">
                                     {% comment %} patern version {% endcomment %}
-                                    {% for size in product_detail.size%}  
+                                    {% for size in product_detail.size%}
                                     <option value="">{{ size }}</option>
                                     {% endfor %}
 
-                                    
+
                                     {% comment %} {% if product_detail.size%}
-                                    <div>{{size}}</div>   
+                                    <div>{{size}}</div>
                                     <option value="">{{ product_detail.size }}</option>
-                                    {% endif %}  {% endcomment %}
-                                    </select>
+                                    {% endif %} {% endcomment %}
+                                </select>
 
                             </div>
-                            <div class="col-6 text-end"><button type="button" class="btn btn-secondary btn-sm">Add to
-                                    basket</button></div>
+                                <div class="col-6 text-end">
+                                    <button type="button" id="add-button" class="btn btn-secondary btn-sm">Add to basket</button>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -61,7 +64,7 @@
         </div>
     </main>
 
-</div> 
+</div>
 
 
 
