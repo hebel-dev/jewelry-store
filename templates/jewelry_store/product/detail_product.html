@@ -33,6 +33,11 @@
                             <div class="col-6 text-end"><span class="h4 fw-bold">PLN {{ product_detail.price }}</span>
                             </div>
                         </div>
+                        <div class="row p-3">
+                            <div class="col-6 h8">QTY</div>
+                            <div name== "basket-qty" class="col-6 text-end" id = "basket-qty" value= "{{ product_detail.quantity }}"><span class="h8 fw-bold">{{ product_detail.quantity }} </span>
+                            </div>
+                        </div>
                     </div>
                     <div class="col">
                         <div class="row p-3">
@@ -52,10 +57,13 @@
                                     <option value="">{{ product_detail.size }}</option>
                                     {% endif %} {% endcomment %}
                                 </select>
+                                <div>
 
+                                </div>
                             </div>
                                 <div class="col-6 text-end">
-                                    <button type="button" id="add-button" class="btn btn-secondary btn-sm">Add to basket</button>
+                                    <button type="button" id="add-button" value={{product_detail.id}} class="btn btn-secondary btn-sm">Add to basket</button>
+                                
                                 </div>
                         </div>
                     </div>
@@ -66,6 +74,40 @@
 
 </div>
 
+<script>
+    $(document).on('click', '#add-button', function (e) {
+                // prevent action specyfic for element
+        e.preventDefault();
+        //console.log($('#select option:selected').text())
+        
+                //setup ajax request 
+        $.ajax({
+                //send data to the server
+            type: 'POST',
+                //where we gona send this data
+            url: '{% url "basket:basket_add" %}',
+                //finaly data
+            data: {
+                productid: $('#add-button').val(),//product_detailid: $('#add-button').val(),
+                productsize: $('#select option:selected').text(),
+                productqty: "{{product_detail.quantity}}",//document.getElementById('basket-qty'),
+                //security reason
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                action: 'post'
+            },
+            // if succes
+            success: function(json){
+            //console.log(json)
+            document.getElementById("basket-qty").innerHTML = json.qty
+            console.log(json)
+            },
+            error: function (xhr, errmsg, err) {}        
+
+        });
+
+    })
+
+</script>
 
 
 

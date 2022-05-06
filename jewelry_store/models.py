@@ -6,7 +6,8 @@ from asyncio.windows_events import NULL
 from decimal import Decimal
 from email.policy import default
 from itertools import product
-from pickle import TRUE
+from pickle import EMPTY_DICT, TRUE
+from queue import Empty
 from random import choice, choices
 from tabnanny import verbose
 from traceback import print_exception
@@ -89,6 +90,9 @@ SIZE_CHOICES  =  [
     (_29, "29/ø22mm/US13-"), (_30, "30/ø22.3mm/US13"), (_31, "31/ø22.6mm"),
     (_32, "32/ø23mm/US14"), (_33, "33/ø23.3mm"), (_34, "34/ø23.6mm"),
  ]
+class ProductManager(models.Manager):
+    def get_queryset(self):
+        return super(ProductManager, self).get_queryset().filter(is_active=True,in_stock=True)
 
 class Category(models.Model):
     name = models.CharField(max_length=255, db_index=True)
@@ -117,9 +121,17 @@ class Collection(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def price(self):
+        price = 0
+        for product in self.products.all():
+            price += product.price
+        return price    
+
+
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)
-    colection_name = models.ForeignKey(Collection, related_name='collection', on_delete=models.CASCADE, blank=True, null=True)
+    colection_name = models.ForeignKey(Collection, related_name='products', on_delete=models.CASCADE, blank=True, null=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)   
     name = models.CharField(max_length=255)
     model_number = models.CharField(max_length=50)
@@ -132,12 +144,22 @@ class Product(models.Model):
     promo_price = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
     slug = models.SlugField(max_length=255)
     in_stock = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
     not_new = models.BooleanField(default=True)
     size = MultiSelectField(choices=SIZE_CHOICES,blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    products = ProductManager()
 
-
+    @property
+    def quantity(self):
+        quantity = 0
+        if not self.size:
+            quantity = 1
+        else:
+            store = len(self.size)
+            quantity += store
+        return quantity
 
 
 
@@ -174,7 +196,7 @@ class Product(models.Model):
         # queryset = sum_tot
         # print("bbbbbb",queryset)    
     def sum_total(self) :
-        queryset = Product.objects.filter(in_stock=True)
+        queryset = Product.products.filter(in_stock=True)
         collections = Collection.objects.all()
         sum_tot=0
         sum_tot_list = []

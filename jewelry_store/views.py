@@ -14,7 +14,7 @@ from .models import Category, Collection, Product
 
 class AllListView(ListView):
     context_object_name = 'all_products'
-    queryset = Product.objects.filter(in_stock=True)
+    queryset = Product.products.filter(in_stock=True, is_active = True)
     template_name = 'jewelry_store/home.html'
     # pk_url_kwarg='collection_id' 
     
@@ -27,17 +27,17 @@ class AllListView(ListView):
         context['collections'] =  Collection.objects.all
         context['products'] = self.queryset
         
-        context['sum']= Product.objects.all()
+        context['sum']= Product.products.all()
         
-        print("DUPA1",Product.objects.filter(colection_name=1))
-        print("DUPA2",Product.objects.filter(colection_name=self.kwargs.get('collection_id')))
-        context['prodo'] = Product.objects.all().aggregate(Sum('price'))['price__sum']
+        print("DUPA1",Product.products.filter(colection_name=1))
+        print("DUPA2",Product.products.filter(colection_name=self.kwargs.get('collection_id')))
+        context['prodo'] = Product.products.all().aggregate(Sum('price'))['price__sum']
         print("context['prodo']",context['prodo'])
 
         return context
         
     def get_queryset(self) :
-        queryset = Product.objects.filter(in_stock=True)
+        queryset = Product.products.filter(in_stock=True, is_active=True)
         collections = Collection.objects.all()
         sum_tot=0
         for col in collections:
@@ -66,7 +66,7 @@ class CategoryView(ListView):
     template_name = 'jewelry_store/product/category.html'
 
     def get_queryset(self):
-        products = Product.objects.filter(category__slug=self.kwargs['slug'],in_stock=True)
+        products = Product.products.filter(category__slug=self.kwargs['slug'],in_stock=True, is_active=True)
         # the same but shorter, was down # category = get_object_or_404(Category,slug=self.kwargs['slug'])# print(category)# products = Product.objects.filter(category=category)# print(products)
         return products    #Product.objects.filter(category=category)#products#Product.objects.filter(category=category)#products#
     
@@ -82,13 +82,13 @@ class CollectionView(ListView):
     pk_url_kwarg = 'collection_id'
     
     def get_queryset(self):
-        products = Product.objects.filter(colection_name__slug=self.kwargs['slug'],in_stock=True)
+        products = Product.products.filter(colection_name__slug=self.kwargs['slug'],in_stock=True, is_active=True)
         # the same but shorter, was down # category = get_object_or_404(Category,slug=self.kwargs['slug'])# print(category)# products = Product.objects.filter(category=category)# print(products)
         return products    #Product.objects.filter(category=category)#products#Product.objects.filter(category=category)#products#
     
     def get_context_data(self,**kwargs):
         context = super(CollectionView,self).get_context_data(**kwargs)
         context['collection'] = get_object_or_404(Collection,slug=self.kwargs['slug'])
-        products = Product.objects.filter(colection_name__slug=self.kwargs['slug'])
+        products = Product.products.filter(colection_name__slug=self.kwargs['slug'])
         context['prodo'] = products.aggregate(Sum('price'))
         return context
