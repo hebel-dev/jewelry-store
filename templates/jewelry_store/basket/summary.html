@@ -12,32 +12,33 @@
 <main>
     <div class="container">
     <h1 class="h5">Shopping basket</h1>
-    {% for item in object_list %}
-    {% with product=item.product %}
-    
+    {% for item in basket %}
+    {{item}}
+    {% with product=item.product%}
+    {{product}}
     <div class="row g-3">
         <div class="col-md-5 col-lg-5 order-md-first bg-light">
             <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image"
-                src="{{ product_detail.image.url }}">
+                src="{{  product.image.url }}">
         </div>
         <div class="col-md-7 col-lg-7 ps-md-3 ps-lg-5">
             <h1 class="mb-0 h4">{{ product_detail.name }}</h1>
-            <p> (Model number) <span class="lead">{{ product_detail.model_number }}</span> </p>
-            <p>material : {{ product_detail.material}}, purity : 0{{ product_detail.purity}}, </p>
-            <p>weight : {{ product_detail.weight}} grams</p>
-            <p>dimension : {{ product_detail.dimension}} </p>
-            <p>size : {{ product_detail.size}} grams</p>
+            <p> (Model number) <span class="lead">{{ product.model_number }}</span> </p>
+            <p>material : {{ product.material}}, purity : 0{{ product.purity}}, </p>
+            <p>weight : {{ product.weight}} grams</p>
+            <p>dimension : {{ product.dimension}} </p>
+            <p>size : {{ item.size}} grams</p>
 
             <div class="border">
                 <div class="col border-bottom">
                     <div class="row p-3">
                         <div class="col-6 h5">Price</div>
-                        <div class="col-6 text-end"><span class="h4 fw-bold">PLN {{ product_detail.price }}</span>
+                        <div class="col-6 text-end"><span class="h4 fw-bold">PLN {{ product.price }}</span>
                         </div>
                     </div>
                     <div class="row p-3">
                         <div class="col-6 h8">QTY</div>
-                        <div name== "basket-qty" class="col-6 text-end" id = "basket-qty" value= "{{ product_detail.quantity }}"><span class="h8 fw-bold">{{ product_detail.quantity }} </span>
+                        <div name== "basket-qty" class="col-6 text-end" id = "basket-qty" value= "{{ product.quantity }}"><span class="h8 fw-bold">{{ product.quantity }} </span>
                         </div>
                     </div>
                 </div>
@@ -49,12 +50,12 @@
                             <label for="select">Size</label>
                             <select id="select">
                                 {% comment %} patern version {% endcomment %}
-                                {% for size in product_detail.size%}
+                                {% for size in product.size%}
                                 <option value="">{{ size }}</option>
                                 {% endfor %}
 
 
-                                {% comment %} {% if product_detail.size%}
+                                {% comment %} {% if product.size%}
                                 <div>{{size}}</div>
                                 <option value="">{{ product_detail.size }}</option>
                                 {% endif %} {% endcomment %}
@@ -64,8 +65,8 @@
                             </div>
                         </div>
                             <div class="col-6 text-end">
-                                <button type="button" id="add-button" value={{product_detail.id}} class="btn btn-secondary btn-sm">Add to basket</button>
-                            
+                                <button type="button" id="update-button" data.index="{{product.id}}" class="btn btn-secondary btn-sm update-button">update</button>
+                                <button type="button" id="delete-button">Delete</button>
                             </div>
                     </div>
                 </div>
